@@ -104,6 +104,10 @@ public class MessageSenderImpl{
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
+        props.put("security.protocol",System.getProperty("security.protocol","SASL_PLAINTEXT"));
+        props.put("sasl.mechanism",System.getProperty("sasl.mechanism","SCRAM-SHA-512"));
+        props.put("sasl.jaas.config",System.getProperty("sasl.jaas.config"));
+        
         producer = new KafkaProducer<String, String>(props);
 
         producerMap.put(eventType, producer);
